@@ -45,6 +45,7 @@ def scrape_list(term, url)
                   district_wikiname: td[4].xpath('.//a[not(@class="new")]/@title').text)
     end
     data[:term] = term
+    data[:type] = data.delete(:constituency) if data[:constituency] == "Women's Representative"
     ScraperWiki.save_sqlite(%i(name party_colour term), data)
   end
 end
